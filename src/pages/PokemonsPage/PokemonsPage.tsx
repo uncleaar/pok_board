@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQueries, useQuery } from 'react-query';
+
 import { useRequestPokemonsQueries } from '../../utils/api/hooks/pokemon';
 
 import { Pokemon } from './Pokemon/Pokemon';

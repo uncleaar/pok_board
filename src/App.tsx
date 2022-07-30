@@ -1,13 +1,7 @@
-import { Route, Routes } from 'react-router-dom';
-
-import { PokemonsPage } from './pages';
+import { AppRoutes } from './utils/routes';
 
 const App = () => {
-  return (
-    <Routes>
-      <Route path='/' element={<PokemonsPage />} />
-    </Routes>
-  );
+  return <AppRoutes />;
 };
 
 export default App;

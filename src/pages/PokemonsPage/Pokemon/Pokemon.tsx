@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import React from 'react';
 
-import { useRequestPokemonQuery } from '../../../utils/api/hooks';
+import styles from './Pokemon.module.scss';
 
 interface PokemonProps {
   pokemon: any;
@@ -9,11 +8,9 @@ interface PokemonProps {
 
 export const Pokemon: React.FC<PokemonProps> = ({ pokemon }) => {
   return (
-    <div className='flex justify-center flex-col shadow rounded-lg p-10 w-80 '>
+    <div className={styles.pokemon_container}>
       <img className='w-full h-40' src={pokemon.sprites.front_default} alt='pokemon_sprite' />
-      <h2 className='text-center w-full capitalize font-bold text-sm text-2xl'>
-        {pokemon.name}
-      </h2>
+      <h2 className='text-center w-full capitalize font-bold text-sm'>{pokemon.name}</h2>
     </div>
   );
 };
