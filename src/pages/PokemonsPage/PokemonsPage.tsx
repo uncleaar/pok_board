@@ -1,23 +1,28 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { useRequestPokemonInfinityQuery } from '../../utils/api/hooks';
+import { useQueries, useQuery } from 'react-query';
+import { useRequestPokemonsQueries } from '../../utils/api/hooks/pokemon';
+
+import { Pokemon } from './Pokemon/Pokemon';
 
 export const PokemonsPage = () => {
-  const [offset, setOffset] = useState(0);
-  const { data, isError, isFetching, fetchNextPage } = useRequestPokemonInfinityQuery();
+  const [offset, setOffset] = useState(20);
 
-  if (!data || isError) return <div>error</div>;
-  if (isFetching) return <p>loading</p>;
-  console.log(data);
+  const results = useRequestPokemonsQueries({ offset });
 
-  const pokemons = data?.pages.reduce((array, page) => [...array, ...page.data.results], []);
+  const isLoading = results.some((results) => results.isLoading);
 
-  console.log(pokemons);
+  if (isLoading) return null;
+
+  const pokemons = results.map((result: any) => result.data.data);
 
   return (
-    <div>
-      {data?.name}
-      <button onClick={() => fetchNextPage()}>{offset}</button>
+    <div className='container'>
+      <button onClick={() => setOffset(offset + 20)}>load more</button>
+      <div className='grid grid-cols-4 gap-3'>
+        {pokemons.map((pokemon, index) => (
+          <Pokemon pokemon={pokemon} key={index} />
+        ))}
+      </div>
     </div>
   );
 };
