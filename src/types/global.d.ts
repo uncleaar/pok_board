@@ -1,6 +1,3 @@
-/**
- * The name and the URL of the referenced resource
- */
 interface NamedAPIResource {
   /** The name of the referenced resource */
   name: string;

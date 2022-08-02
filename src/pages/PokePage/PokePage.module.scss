@@ -7,6 +7,7 @@
 }
 
 .list {
+  @apply ml-6;
 }
 
 .color {
@@ -27,7 +28,7 @@
 }
 
 .pokemon_item {
-  @apply flex color opacity-80 text-lg capitalize text-white mb-2.5 items-center justify-center overflow-hidden font-bold p-2 rounded-l-full;
+  @apply flex color opacity-80 text-lg capitalize  text-white mb-2.5 items-center justify-center overflow-hidden font-bold p-2 rounded-l-full;
   @apply hover;
 }
 
@@ -42,7 +43,7 @@
 }
 
 .card {
-  @apply flex flex-col p-4;
+  @apply flex flex-col p-8 shadow-xl rounded-xl;
 }
 
 .card_title {
@@ -55,4 +56,28 @@
 
 .card_title_id {
   @apply text-lg capitalize font-normal;
+}
+
+.card img {
+  @apply w-80 h-80;
+}
+
+.info {
+  @apply flex justify-between p-6;
+}
+
+.info_title {
+  @apply text-lg text-zinc-900 font-bold;
+}
+
+.info_item {
+  @apply border-b-2 pb-1 mt-1;
+}
+
+.card_types {
+  @apply flex gap-2 mt-2;
+}
+
+.card_type {
+  @apply bg-gray-400 rounded-full p-2 text-white;
 }
