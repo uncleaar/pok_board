@@ -1,0 +1,23 @@
+.c {
+  @apply shadow-lg mb-5;
+}
+
+.header {
+  @apply container flex items-center justify-between p-2;
+}
+
+.logo {
+  @apply w-16 h-16;
+}
+
+.items {
+  @apply font-bold;
+}
+
+.item {
+  @apply hover:text-stone-700 transition-all uppercase;
+}
+
+.item + .item {
+  @apply px-5;
+}

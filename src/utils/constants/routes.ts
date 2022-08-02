@@ -1,4 +1,5 @@
 export const ROUTES = {
   POKEMONS: '/',
-  POKE: '/poke'
+  POKE: '/poke',
+  POKEMON: '/pokemon/:id'
 };

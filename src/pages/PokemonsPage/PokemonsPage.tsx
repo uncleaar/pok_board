@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useQueries, useQuery } from 'react-query';
+import { QueryClient, useQueries, useQuery, useQueryClient } from 'react-query';
+import { Link } from 'react-router-dom';
 
 import { useRequestPokemonsQueries } from '../../utils/api/hooks/pokemon';
 
@@ -8,20 +9,20 @@ import { Pokemon } from './Pokemon/Pokemon';
 export const PokemonsPage = () => {
   const [offset, setOffset] = useState(20);
 
-  const results = useRequestPokemonsQueries({ offset });
+  const { data, isLoading } = useRequestPokemonsQueries({ offset });
 
-  const isLoading = results.some((results) => results.isLoading);
+  if (isLoading && data) return null;
 
-  if (isLoading) return null;
-
-  const pokemons = results.map((result: any) => result.data.data);
+  const pokemons = data?.data.results;
 
   return (
     <div className='container'>
       <button onClick={() => setOffset(offset + 20)}>load more</button>
       <div className='grid grid-cols-4 gap-3'>
-        {pokemons.map((pokemon, index) => (
-          <Pokemon pokemon={pokemon} key={index} />
+        {pokemons?.map((pokemon, index) => (
+          <div>{pokemon.name}</div>
+
+          // <Pokemon pokemon={pokemon} key={index} />
         ))}
       </div>
     </div>

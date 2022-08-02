@@ -1,13 +1,12 @@
+import cn from 'classnames';
 import React, { useState } from 'react';
 
-import cn from 'classnames';
-
-import { useRequestPokemonsQueries } from '../../utils/api/hooks/pokemon';
 import { useRequestPokemonFormQuery } from '../../utils/api/hooks';
+import { useRequestPokemonsQueries } from '../../utils/api/hooks/pokemon';
 
 import styles from './PokePage.module.scss';
 
-export const PokePage = () => {
+export const PokePage: React.FC = () => {
   const [offset, setOffset] = useState(8);
 
   const [selectedPokemonID, setSelectedPokemonID] = useState(1);
