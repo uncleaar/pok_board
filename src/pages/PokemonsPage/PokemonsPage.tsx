@@ -1,28 +1,33 @@
 import { useState } from 'react';
 import { QueryClient, useQueries, useQuery, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
+import { getPokemonId } from '../../utils/helpers/getPokemonId';
 
-import { useRequestPokemonsQueries } from '../../utils/api/hooks/pokemon';
+import { useRequestPokemonsInfinityQueries } from '../../utils/api/hooks/pokemon';
 
 import { Pokemon } from './Pokemon/Pokemon';
 
-export const PokemonsPage = () => {
-  const [offset, setOffset] = useState(20);
+import styles from './PokemonsPage.module.scss';
 
-  const { data, isLoading } = useRequestPokemonsQueries({ offset });
+export const PokemonsPage: React.FC = () => {
+  const { data, isLoading, fetchNextPage } = useRequestPokemonsInfinityQueries({});
 
-  if (isLoading && data) return null;
+  if (isLoading || !data) return null;
 
-  const pokemons = data?.data.results;
+  const pokemons = data.pages.reduce(
+    (pokemons: NamedAPIResource[], { data }: any) => [...pokemons, ...data.results],
+    []
+  );
 
   return (
     <div className='container'>
-      <button onClick={() => setOffset(offset + 20)}>load more</button>
-      <div className='grid grid-cols-4 gap-3'>
+      <button onClick={() => fetchNextPage()}>load more</button>
+      <div className={styles.pokemons_container}>
         {pokemons?.map((pokemon, index) => (
-          <div>{pokemon.name}</div>
-
-          // <Pokemon pokemon={pokemon} key={index} />
+          <div key={index} className={styles.pokemon}>
+            <div className={styles.pokemon_number}>{getPokemonId(index + 1)}</div>
+            <div className={styles.pokemon_name}>{pokemon.name}</div>
+          </div>
         ))}
       </div>
     </div>
