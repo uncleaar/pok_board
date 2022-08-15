@@ -1,20 +1,20 @@
 import { useInfiniteQuery, useQueries, useQuery } from 'react-query';
 
-import { requestPokemon,requestPokemons } from '../../requests';
+import { requestPokemon, requestPokemons } from '../../requests';
 
 interface UseRequestPokemonQueriesParams {
   offset: number;
 }
 
-const REQUEST_POKEMON_LIMIT = 20;
+const REQUEST_POKEMON_LIMIT = 40;
 
-export const useRequestPokemonsInfinityQueries = ({ config }: RequestQueryParams) =>
+export const useRequestPokemonsInfinityQueries = () =>
   useInfiniteQuery(
     'pokemon',
     ({ pageParam = 0 }) =>
       requestPokemons({ params: { limit: REQUEST_POKEMON_LIMIT, offset: pageParam } }),
     {
-      ...(config && { ...config }),
+      // ...(config && { ...config }),
       getNextPageParam: (_lastPokemonsData, allPokemonsData) =>
         allPokemonsData.length * REQUEST_POKEMON_LIMIT
     }

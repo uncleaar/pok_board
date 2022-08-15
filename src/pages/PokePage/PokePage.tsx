@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import PokemonCard from '../../common';
 import React, { useState } from 'react';
 
 import { useRequestPokemonFormQuery } from '../../utils/api/hooks';
@@ -30,46 +31,7 @@ export const PokePage: React.FC = () => {
   return (
     <div className={styles.page}>
       <div className={styles.content}>
-        <div className={styles.card}>
-          <div className={styles.card_title}>
-            <div className={styles.card_title_name}>{selectedPokemon.name}</div>
-            <div className={styles.card_title_id}>#000{selectedPokemon.id}</div>
-          </div>
-
-          <div className={styles.card_types}>
-            {selectedPokemon.types.map(({ type }) => (
-              <div key={type.slot} className={styles.card_type}>
-                {type.name}
-              </div>
-            ))}
-          </div>
-          <div>
-            <img src={selectedPokemon.sprites.front_default} alt='' />
-          </div>
-          <div className={styles.info}>
-            <div>
-              <div className={styles.info_title}>stats</div>
-              <ul>
-                {selectedPokemon?.stats?.map((stat) => (
-                  <li key={stat.id} className={styles.info_item}>
-                    {stat.stat.name}: {stat.base_stat}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <div className={styles.info_title}>abilities</div>
-              <ul>
-                {selectedPokemon?.abilities?.map(({ ability, id }: any) => (
-                  <li key={id} className={styles.info_item}>
-                    {ability.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+        <PokemonCard pokemon={selectedPokemon} />
         <ul className={styles.list}>
           {pokemons.map((pokemon) => {
             const isActive = selectedPokemonID === pokemon.id;
