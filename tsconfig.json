@@ -2,10 +2,13 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
-    "typeRoots": ["./src/types"],
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -18,14 +21,54 @@
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
-    //  "@pages": ["./pages"],
-     "@utils": ["./utils"],
-     "@assets": ["./assets"]
+      "@common": [
+        "./common"
+      ],
+      "@common/*": [
+        "./common/*"
+      ],
+      "@hooks": [
+        "./hooks/"
+      ],
+      "@hooks/*": [
+        "./hooks/*"
+      ],
+      "@pages": [
+        "./pages"
+      ],
+      "@features/*": [
+        "./features/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@utils/api": [
+        "./utils/api"
+      ],
+      "@utils/firebase": [
+        "./utils/firebase"
+      ],
+      "@utils/constants": [
+        "./utils/constants"
+      ],
+      "@utils/helpers": [
+        "./utils/helpers"
+      ],
+      "@utils/contexts": [
+        "./utils/contexts"
+      ],
+      "@utils/hooks": [
+        "./utils/hooks"
+      ]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

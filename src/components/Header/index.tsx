@@ -5,8 +5,7 @@ import Logo from '../../assets/logo.png';
 
 import styles from './Header.module.scss';
 
-export const Header: React.FC = () => {
-  return (
+export const Header: React.FC = () => (
     <div className={styles.c}>
       <div className={styles.header}>
         <img className={styles.logo} src={Logo} alt='' />
@@ -21,4 +20,3 @@ export const Header: React.FC = () => {
       </div>
     </div>
   );
-};

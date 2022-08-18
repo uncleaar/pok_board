@@ -1,16 +1,13 @@
-import { useDeferredValue, useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { QueryClient, useQueries, useQuery, useQueryClient } from 'react-query';
-import { Link } from 'react-router-dom';
 
 import useDebounce from '../../hooks/useDebounce';
-import { useRequestPokemonQuery } from '../../utils/api/hooks';
-import { useRequestPokemonsInfinityQueries } from '../../utils/api/hooks/pokemon';
-import { getPokemonId } from '../../utils/helpers/getPokemonId';
+import { useRequestPokemonQuery, useRequestPokemonsInfinityQueries } from '@utils/api/hooks';
 
 import { Pokemon } from './Pokemon/Pokemon';
 
 import styles from './PokemonsPage.module.scss';
+import { getPokemonId } from '@utils/helpers/getPokemonId';
 
 interface PokemonInfoProps {
   id: Pokemon['id'];

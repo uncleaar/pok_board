@@ -7,6 +7,4 @@ interface RequestPokemonStatParams {
   config?: AxiosRequestConfig<{ limit: number }>;
 }
 
-export const requestStat = ({ params, config }: RequestPokemonStatParams) => {
-  return api.get<PokemonStat>(`stat/${params.id}`, { ...config });
-};
+export const requestStat = ({ params, config }: RequestPokemonStatParams) => api.get<PokemonStat>(`stat/${params.id}`, { ...config });

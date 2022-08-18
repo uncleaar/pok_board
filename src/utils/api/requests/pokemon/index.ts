@@ -7,6 +7,4 @@ interface RequestPokemonParams {
   config?: AxiosRequestConfig;
 }
 
-export const requestPokemons = ({ params, config }: RequestPokemonParams) => {
-  return api.get<NamedAPIResourceList>(`pokemon`, { params, ...config });
-};
+export const requestPokemons = ({ params, config }: RequestPokemonParams) => api.get<NamedAPIResourceList>(`pokemon`, { params, ...config });

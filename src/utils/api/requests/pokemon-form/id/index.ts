@@ -7,6 +7,4 @@ interface RequestPokemonFormParams {
   config?: AxiosRequestConfig<{ limit: number }>;
 }
 
-export const requestPokemonForm = ({ params, config }: RequestPokemonFormParams) => {
-  return api.get<Pokemon>(`evolution-chain/${params.id}`, { ...config });
-};
+export const requestPokemonForm = ({ params, config }: RequestPokemonFormParams) => api.get<Pokemon>(`evolution-chain/${params.id}`, { ...config });

@@ -1,6 +1,7 @@
 import cn from 'classnames';
-import PokemonCard from '../../common';
 import React, { useState } from 'react';
+
+import PokemonCard from '@common/PokemonCard/PokemonCard';
 
 import { useRequestPokemonFormQuery } from '../../utils/api/hooks';
 import { useRequestPokemonsQueries } from '../../utils/api/hooks/pokemon';

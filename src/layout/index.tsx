@@ -6,11 +6,9 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-export const Layout = ({ children }: LayoutProps) => {
-  return (
+export const Layout = ({ children }: LayoutProps) => (
     <>
       <Header />
       {children}
     </>
   );
-};

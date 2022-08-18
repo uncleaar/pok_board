@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getPokemonId } from '@utils/helpers/getPokemonId';
+import { getPokemonId } from '../../utils/helpers/getPokemonId';
 
 import styles from './PokemonCard.module.scss';
 
@@ -8,8 +8,7 @@ interface PokemonCardProps {
   pokemon: Pokemon;
 }
 
-const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
-  return (
+const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => (
     <div className={styles.card}>
       <div className={styles.card_title}>
         <div className={styles.card_title_name}>{pokemon.name}</div>
@@ -45,6 +44,5 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
       </div>
     </div>
   );
-};
 
 export default PokemonCard;
