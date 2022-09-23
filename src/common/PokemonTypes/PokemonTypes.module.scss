@@ -1,0 +1,15 @@
+.types {
+  @apply flex flex-wrap gap-2;
+}
+
+.grass {
+  @apply text-green-600 border-2 border-green-600;
+}
+
+.poison {
+  @apply text-purple-600 border-2 border-purple-600;
+}
+
+.fire {
+  @apply text-red-600 border-2 border-red-600;
+}

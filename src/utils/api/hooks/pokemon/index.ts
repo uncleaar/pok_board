@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQueries, useQuery } from 'react-query';
 
-import { requestPokemon, requestPokemons } from '../../requests';
+import { requestPokemonById, requestPokemons } from '../../requests';
 
 interface UseRequestPokemonQueriesParams {
   offset: number;
@@ -41,7 +41,7 @@ export const useRequestPokemonsQueries = ({ offset }: UseRequestPokemonQueriesPa
       const pokemonId = index + 1;
       return {
         queryKey: ['pokemon', pokemonId],
-        queryFn: () => requestPokemon({ params: { id: pokemonId } })
+        queryFn: () => requestPokemonById({ params: { id: pokemonId } })
       };
     })
   );
