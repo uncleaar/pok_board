@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
 
-import { PokemonTypes } from '@common';
-import PokemonStats from '@common/PokemonStats/PokemonStats';
+import { PokemonStats,PokemonTypes } from '@common';
 import {
   useRequestPokemonByIdQuery,
   useRequestPokemonsInfinityQueries

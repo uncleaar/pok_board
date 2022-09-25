@@ -7,8 +7,8 @@ interface PokemonStatsProps {
   stats: string[];
 }
 
-const PokemonStats: React.FC<PokemonStatsProps> = ({ title, stats }) => {
-  console.log('@');
+export const PokemonStats: React.FC<PokemonStatsProps> = ({ title, stats }) => {
+  console.log('');
 
   return (
     <div>
@@ -21,5 +21,3 @@ const PokemonStats: React.FC<PokemonStatsProps> = ({ title, stats }) => {
     </div>
   );
 };
-
-export default PokemonStats;
