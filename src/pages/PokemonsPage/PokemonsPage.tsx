@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
 
-import { PokemonStats,PokemonTypes } from '@common';
+import { PokemonStats, PokemonTypes } from '@common';
 import {
   useRequestPokemonByIdQuery,
   useRequestPokemonsInfinityQueries
@@ -73,11 +73,11 @@ export const PokemonInfo: React.FC<PokemonInfoProps> = ({ id, onClose }) => {
 export const PokemonsPage: React.FC = () => {
   const [pokemonId, setPokemonId] = useState<Pokemon['id'] | null>(null);
   const { ref, inView } = useInView();
-  const { data, isLoading, fetchNextPage, hasNextpage } = useRequestPokemonsInfinityQueries();
+  const { data, isLoading, fetchNextPage, hasNextPage } = useRequestPokemonsInfinityQueries();
   // const debouncedValueId = useDebounce(pokemonId, 1000);
 
   useEffect(() => {
-    if (inView && hasNextpage) {
+    if (inView && hasNextPage) {
       fetchNextPage();
     }
   }, [inView, data]);

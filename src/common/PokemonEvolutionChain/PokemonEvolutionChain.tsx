@@ -1,30 +1,34 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useRequestEvolutionChainQuery } from '@utils/api/hooks';
+
+import { Title } from '../../ui';
+
+import { PokemonEvolutionChainItem } from './PokemonEvolutionChainItem/PokemonEvolutionChainItem';
 
 import styles from './PokemonEvolutionChain.module.scss';
 
 interface PokemonEvolutionChainProps {
   chainId: number;
-  pokemonId: Pokemon['id'];
+  pokemonName: Pokemon['name'];
 }
 
 const generateEvolutionChain = (
   chainLink: ChainLink,
   chain: { name: Pokemon['name'] }[] = []
-) => {
-  if (!chainLink.evolves_to.length) {
-    chain = [...chain, { name: chainLink.species.name }];
-    return chain;
-  }
-  const ch = generateEvolutionChain(chainLink.evolves_to[0], chain);
-  chain = [...chain, ...ch];
-  return chain;
+): any => {
+  chain = [...chain, { name: chainLink.species.name }];
+
+  if (!chainLink.evolves_to.length) return chain;
+
+  return chainLink.evolves_to.flatMap((evol) =>
+    generateEvolutionChain(chainLink.evolves_to[0], chain)
+  );
 };
 
 export const PokemonEvolutionChain: React.FC<PokemonEvolutionChainProps> = ({
   chainId,
-  pokemonId
+  pokemonName
 }) => {
   const { data: evolutionChainData, isLoading: evolutionChainLoading } =
     useRequestEvolutionChainQuery({
@@ -34,7 +38,19 @@ export const PokemonEvolutionChain: React.FC<PokemonEvolutionChainProps> = ({
   const isEvolutionChainData = !!evolutionChainData || !evolutionChainLoading;
   if (!isEvolutionChainData) return null;
 
-  console.log('asd', generateEvolutionChain(evolutionChainData?.data.chain));
+  const evolutionChain = generateEvolutionChain(evolutionChainData.data.chain);
 
-  return <div>PokemonEvolutionChain</div>;
+  return (
+    <div className={styles.container}>
+      <Title>Evolution chain</Title>
+      <div className={styles.evolution__container}>
+        {evolutionChain?.map((evolve: any) => (
+          <PokemonEvolutionChainItem
+            name={evolve.name}
+            isActive={pokemonName === evolve.name}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };

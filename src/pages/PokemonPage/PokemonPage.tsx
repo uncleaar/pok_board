@@ -25,11 +25,11 @@ export const PokemonPage: React.FC = () => {
   const isPokemonData = !!pokemonData && !pokemonLoading;
   const isPokemonSpeciesData = !!pokemonSpeciesData && !pokemonSpeciesLoading;
 
-  if (!isPokemonData && !isPokemonSpeciesData) return null;
+  if (!isPokemonData || !isPokemonSpeciesData) return null;
 
-  const chainId = pokemonSpeciesData?.data.evolution_chain.url.match(/\/(\d+)/)![1];
-
-  console.log(isPokemonData, 'data');
+  const chainId = pokemonSpeciesData!.data.evolution_chain.url
+    .replace('https://pokeapi.co/api/v2/evolution-chain/', '')
+    .replace('/', '');
 
   return (
     <div className={styles.page}>
@@ -59,8 +59,7 @@ export const PokemonPage: React.FC = () => {
           </div>
         </>
       )}
-
-      <PokemonEvolutionChain chainId={+chainId} pokemonId={id} />
+      <PokemonEvolutionChain chainId={chainId} pokemonName={pokemonData.data.name} />
       <div className={styles.buttons}>
         {id > 1 && <Button onClick={() => navigate(`/pokemon/${id - 1}`)}>Prev</Button>}
 

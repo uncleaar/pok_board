@@ -1,0 +1,11 @@
+.evolve {
+  @apply rounded-lg shadow-lg p-1 border-2;
+}
+
+.name {
+  @apply text-center text-lg;
+}
+
+.active_evolution {
+  @apply border-orange-300 border-2;
+}
