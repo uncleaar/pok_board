@@ -1,3 +1,10 @@
+type User = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  city: string;
+};
+
 type RequestParams<Params> = Params;
 
 interface RequestMutationSettings<Func = {}> {

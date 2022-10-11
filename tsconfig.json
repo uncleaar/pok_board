@@ -30,9 +30,6 @@
       "@ui": [
         "./ui"
       ],
-      "@ui/*": [
-        "./ui/*"
-      ],
       "@hooks": [
         "./hooks/"
       ],
@@ -52,7 +49,7 @@
         "./utils/api"
       ],
       "@utils/firebase": [
-        "./utils/firebase"
+        ".utils/firebase"
       ],
       "@utils/constants": [
         "./utils/constants"

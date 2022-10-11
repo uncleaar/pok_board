@@ -1,12 +1,7 @@
-import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
-} from 'firebase/auth';
-
-import { getFireStore, collection, addDoc } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { createUserWithEmailAndPassword,getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { addDoc,collection, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyB5RtxSqycDVOtBfJNXbflFkKP6yW0Uo_U',
@@ -21,7 +16,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
-export const db = getFireStore(app);
+export const db = getFirestore(app);
 
 export const loginWithEmailAndPassword = async (email: string, password: string) => {
   try {
@@ -31,14 +26,8 @@ export const loginWithEmailAndPassword = async (email: string, password: string)
   }
 };
 
-export type User = {
-  firstname: string;
-  lastname: string;
-  email: string;
-  city: string;
-};
-
 export const registerWithEmailAndPassword = async (user: User, password: string) => {
+  console.log('user,', user);
   try {
     const response = await createUserWithEmailAndPassword(auth, user.email, password);
     await addDoc(collection(db, 'users'), {
@@ -46,7 +35,9 @@ export const registerWithEmailAndPassword = async (user: User, password: string)
       ...user,
       authProvider: 'local'
     });
+    return;
   } catch (error) {
     console.log('error', error);
+    return error;
   }
 };

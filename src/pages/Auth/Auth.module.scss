@@ -5,7 +5,3 @@
 .sign_up_form {
   @apply flex flex-col gap-2;
 }
-
-.sign_up_form input {
-  @apply py-3 px-2 rounded-lg bg-slate-200;
-}
