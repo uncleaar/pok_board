@@ -1,7 +1,11 @@
 .auth {
-  @apply flex justify-center items-center h-screen;
+  @apply flex justify-center items-center h-screen flex-col;
 }
 
 .sign_up_form {
   @apply flex flex-col gap-2;
+}
+
+.sign_up_form button {
+  @apply mt-5;
 }
