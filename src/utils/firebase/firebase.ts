@@ -17,27 +17,3 @@ export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-
-export const loginWithEmailAndPassword = async (email: string, password: string) => {
-  try {
-    return await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.log('err', error);
-  }
-};
-
-export const registerWithEmailAndPassword = async (user: User, password: string) => {
-  console.log('user,', user);
-  try {
-    const response = await createUserWithEmailAndPassword(auth, user.email, password);
-    await addDoc(collection(db, 'users'), {
-      uuid: response.user.uid,
-      ...user,
-      authProvider: 'local'
-    });
-    return;
-  } catch (error) {
-    console.log('error', error);
-    return error;
-  }
-};

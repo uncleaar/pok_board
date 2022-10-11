@@ -1,11 +1,19 @@
 .auth {
-  @apply flex justify-center items-center h-screen flex-col;
+  @apply flex justify-center h-screen flex-col;
 }
 
 .sign_up_form {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col gap-2 px-5;
 }
 
 .sign_up_form button {
   @apply mt-5;
+}
+
+.title {
+  @apply text-3xl font-semibold mb-4 px-5;
+}
+
+.cover {
+  @apply bg-cover h-full w-full rounded-b-3xl  bg-no-repeat mb-20;
 }

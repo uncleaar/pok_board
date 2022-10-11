@@ -5,7 +5,11 @@ module.exports = {
       center: true,
     },
 
-    extend: {},
+    extend: {
+      backgroundImage: {
+        cover: "var(--image-cover)",
+      },
+    },
   },
   plugins: [],
 };

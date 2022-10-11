@@ -11,6 +11,7 @@ export default defineConfig({
       "@common": path.resolve(__dirname, "./src/common"),
       "@common/*": path.resolve(__dirname, "./src/common"),
       "@pages": path.resolve(__dirname, "./src/pages"),
+      "@ui": path.resolve(__dirname, "./src/ui"),
       "@utils/api": path.resolve(__dirname, "./src/utils/api"),
       "@utils/firebase": path.resolve(__dirname, "./src/utils/firebase"),
       "@utils/constants": path.resolve(__dirname, "./src/utils/constants"),

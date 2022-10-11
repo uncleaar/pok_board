@@ -1,82 +1,58 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
-import { registerWithEmailAndPassword, loginWithEmailAndPassword } from '@utils/firebase';
+import { useMutation } from 'react-query';
 
 import { Button, Input } from '../../ui';
 
+import { SignInForm } from './components/SignInForm/SignInForm';
+
 import styles from './Auth.module.scss';
-import { useMutation } from 'react-query';
 
-interface SignInFormValues {
-  email: User['email'];
-  password: string;
-}
+// interface SignUpFormValues extends User {
+//   password: string;
+// }
 
-export const SignInForm: React.FC = () => {
-  const { register, handleSubmit, formState } = useForm<SignInFormValues>();
-  const { isSubmitting } = formState;
+// export const SignUpForm: React.FC = () => {
+//   const { mutateAsync } = useMutation(
+//     'signUp',
+//     (params: any) => registerWithEmailAndPassword(params.user, params.password),
+//     {
+//       onSuccess: (data) => {
+//         console.log(data, 'data');
+//       },
+//       onError: (error) => console.log('error', error)
+//     }
+//   );
 
-  return (
-    <form
-      className={styles.sign_up_form}
-      onSubmit={handleSubmit(async ({ password, email }) => {
-        const { user } = await loginWithEmailAndPassword(email, password);
-        console.log(user, 'user');
-      })}
-    >
-      <Input {...register('email')} disabled={isSubmitting} placeholder='email' type='email' />
-      <Input {...register('password')} placeholder='password' type='password' />
-      <Button type='submit' variant='outlined'>
-        Sign In
-      </Button>
-    </form>
-  );
-};
+//   const { register, handleSubmit, formState } = useForm<SignUpFormValues>();
+//   const { isSubmitting } = formState;
 
-interface SignUpFormValues extends User {
-  password: string;
-}
-
-export const SignUpForm: React.FC = () => {
-  const { mutateAsync } = useMutation(
-    'signUp',
-    (params: any) => registerWithEmailAndPassword(params.user, params.password),
-    {
-      onSuccess: (data) => {
-        console.log(data, 'data');
-      },
-      onError: (error) => console.log('error', error)
-    }
-  );
-
-  const { register, handleSubmit, formState } = useForm<SignUpFormValues>();
-  const { isSubmitting } = formState;
-
-  return (
-    <form
-      className={styles.sign_up_form}
-      onSubmit={handleSubmit(({ password, ...user }) => mutateAsync({ user, password }))}
-    >
-      <Input {...register('firstname')} disabled={isSubmitting} placeholder='First name' />
-      <Input {...register('lastname')} disabled={isSubmitting} placeholder='Last name' />
-      <Input {...register('email')} disabled={isSubmitting} placeholder='email' type='email' />
-      <Input {...register('city')} disabled={isSubmitting} placeholder='city' />
-      <Input {...register('password')} placeholder='password' type='password' />
-      <Button type='submit' variant='outlined'>
-        Sign Up
-      </Button>
-    </form>
-  );
-};
+//   return (
+//     <form
+//       className={styles.sign_up_form}
+//       onSubmit={handleSubmit(({ password, ...user }) => mutateAsync({ user, password }))}
+//     >
+//       <Input {...register('firstname')} disabled={isSubmitting} placeholder='First name' />
+//       <Input {...register('lastname')} disabled={isSubmitting} placeholder='Last name' />
+//       <Input {...register('email')} disabled={isSubmitting} placeholder='email' type='email' />
+//       <Input {...register('city')} disabled={isSubmitting} placeholder='city' />
+//       <Input {...register('password')} placeholder='password' type='password' />
+//       <Button type='submit' variant='outlined'>
+//         Sign Up
+//       </Button>
+//     </form>
+//   );
+// };
 
 export const Auth: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState<boolean>(true);
 
   return (
     <div className={styles.auth}>
-      {!isSignUp && <SignInForm />}
-      {isSignUp && <SignUpForm />}
+      <div className={styles.cover} />
+
+      {isSignUp && <SignInForm />}
+      {/* {isSignUp && <SignUpForm />} */}
       <Button onClick={() => setIsSignUp(!isSignUp)}>
         {isSignUp ? 'Already have account' : 'Sign Up'}
       </Button>

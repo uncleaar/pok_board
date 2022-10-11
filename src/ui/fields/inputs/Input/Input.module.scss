@@ -5,3 +5,11 @@
 .label {
   @apply text-sm font-semibold mb-1;
 }
+
+.error {
+  @apply font-normal text-red-400 text-lg p-1;
+}
+
+.input_error {
+  @apply bg-red-100 ring-2 ring-red-300;
+}
