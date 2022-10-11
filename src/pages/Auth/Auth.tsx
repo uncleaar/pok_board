@@ -6,6 +6,7 @@ import { registerWithEmailAndPassword, loginWithEmailAndPassword } from '@utils/
 import { Button, Input } from '../../ui';
 
 import styles from './Auth.module.scss';
+import { useMutation } from 'react-query';
 
 interface SignInFormValues {
   email: User['email'];
@@ -38,15 +39,24 @@ interface SignUpFormValues extends User {
 }
 
 export const SignUpForm: React.FC = () => {
+  const { mutateAsync } = useMutation(
+    'signUp',
+    (params: any) => registerWithEmailAndPassword(params.user, params.password),
+    {
+      onSuccess: (data) => {
+        console.log(data, 'data');
+      },
+      onError: (error) => console.log('error', error)
+    }
+  );
+
   const { register, handleSubmit, formState } = useForm<SignUpFormValues>();
   const { isSubmitting } = formState;
 
   return (
     <form
       className={styles.sign_up_form}
-      onSubmit={handleSubmit(({ password, ...user }) =>
-        registerWithEmailAndPassword(user, password)
-      )}
+      onSubmit={handleSubmit(({ password, ...user }) => mutateAsync({ user, password }))}
     >
       <Input {...register('firstname')} disabled={isSubmitting} placeholder='First name' />
       <Input {...register('lastname')} disabled={isSubmitting} placeholder='Last name' />
