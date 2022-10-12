@@ -49,7 +49,10 @@
         "./utils/api"
       ],
       "@utils/firebase": [
-        ".utils/firebase"
+        "./utils/firebase"
+      ],
+       "@utils/validation": [
+        "./utils/validation"
       ],
       "@utils/constants": [
         "./utils/constants"

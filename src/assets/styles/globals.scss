@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-slate-100;
+}
+
 :root {
   --image-cover: url('../images/bg.jpg');
 }

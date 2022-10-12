@@ -13,7 +13,7 @@ export const Input: React.FC<InputProps> = React.forwardRef(
     <label htmlFor={id}>
       <span className={styles.label}>{placeholder}</span>
       <input
-        className={classnames(styles.input, { [styles.input_error]: !error })}
+        className={classnames(styles.input, { [styles.input_error]: !!error })}
         ref={inputRef}
         id={id}
         {...props}

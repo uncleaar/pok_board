@@ -1,9 +1,9 @@
 .auth {
-  @apply flex justify-center h-screen flex-col;
+  @apply flex flex-col justify-center;
 }
 
 .sign_up_form {
-  @apply flex flex-col gap-2 px-5;
+  @apply flex flex-col justify-center  gap-4 px-5;
 }
 
 .sign_up_form button {
@@ -11,9 +11,26 @@
 }
 
 .title {
-  @apply text-3xl font-semibold mb-4 px-5;
+  @apply mb-4 px-5 text-3xl font-semibold;
 }
 
 .cover {
-  @apply bg-cover h-full w-full rounded-b-3xl  bg-no-repeat mb-20;
+  @apply mb-20 h-52 w-full rounded-b-3xl  bg-cover bg-center bg-no-repeat;
+}
+
+@screen md {
+  .auth {
+    @apply flex h-screen items-center justify-center;
+  }
+  .card {
+    @apply flex w-1/2 flex-row rounded-lg shadow-lg;
+  }
+
+  .sign_up_form {
+    @apply w-full p-6;
+  }
+
+  .cover {
+    @apply mb-0 h-full w-1/2 rounded-b-none rounded-l-lg;
+  }
 }
