@@ -1,6 +1,5 @@
 type User = {
-  firstname: string;
-  lastname: string;
+  name: string;
   email: string;
   city: string;
 };

@@ -3,9 +3,13 @@ import { useForm } from 'react-hook-form';
 
 import { Button, Input } from '@ui';
 import { useLogInWithEmailAndPasswordMutation } from '@utils/firebase';
+import { emailSchema, passwordSchema } from '@utils/validation';
 
 import styles from '../../Auth.module.scss';
-import { emailSchema, passwordSchema } from '@utils/validation';
+import { useStore } from '@utils/hooks';
+import { useNavigate } from 'react-router-dom';
+import { AUTH_COOKIE, ROUTES } from '@utils/constants';
+import { setCookie } from '@utils/helpers';
 
 interface SignInFormValues {
   email: User['email'];
@@ -13,11 +17,17 @@ interface SignInFormValues {
 }
 
 export const SignInForm: React.FC = () => {
+  const { setStore } = useStore();
+  const navigate = useNavigate();
+
   const { mutate: logInWithEmailAndPassword, isLoading: logInWithEmailAndPasswordIsLoading } =
     useLogInWithEmailAndPasswordMutation({
       options: {
-        onSuccess: (data: any) => {
-          console.log('@', data);
+        onSuccess: ({ user }: any) => {
+          setCookie(AUTH_COOKIE, user.uid);
+
+          setStore({ session: { isLoginIn: true } });
+          navigate(ROUTES.POKEMONS);
         },
         onError: (error: any) => console.log(error, 'error')
       }

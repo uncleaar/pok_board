@@ -1,13 +1,37 @@
-import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { Auth, PokemonPage, PokemonsPage, PokePage } from '@pages';
 import { ROUTES } from '@utils/constants';
+import { StoreProvider } from '@utils/context';
+import { useStore } from '@utils/hooks';
 
-export const AppRoutes = () => (
+import { Layout } from '../../layout';
+
+export const AuthApp = () => (
   <Routes>
-    <Route path={ROUTES.POKEMONS} element={<PokemonsPage />} />
-    <Route path={ROUTES.POKEMON} element={<PokemonPage />} />
-    <Route path={ROUTES.POKE} element={<PokePage />} />
     <Route path={ROUTES.AUTH} element={<Auth />} />
+    <Route path='*' element={<Navigate to={ROUTES.AUTH} />} />
   </Routes>
 );
+
+export const AppRoutes = () => {
+  const {
+    session: { isLoginIn }
+  } = useStore();
+
+  return (
+    <BrowserRouter>
+      {!isLoginIn && <AuthApp />}
+      {isLoginIn && (
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path={ROUTES.POKEMON} element={<PokemonPage />} />
+            <Route path={ROUTES.POKE} element={<PokePage />} />
+            <Route path={ROUTES.POKEMONS} element={<PokemonsPage />} />
+          </Route>
+        </Routes>
+      )}
+    </BrowserRouter>
+  );
+};

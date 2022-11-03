@@ -1,26 +1,30 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { Button, Input } from '@ui';
+import { AUTH_COOKIE, ROUTES } from '@utils/constants';
 import { useRegisterWithEmailAndPasswordMutation } from '@utils/firebase';
+import { emailSchema, passwordSchema } from '@utils/validation';
 
 import styles from '../../Auth.module.scss';
-import { emailSchema, passwordSchema } from '@utils/validation';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@utils/constants';
+import { useStore } from '@utils/hooks';
+import { setCookie } from '@utils/helpers';
 
 interface SignUpFormValues extends User {
   password: string;
 }
 
 export const SignUpForm: React.FC = () => {
+  const { setStore } = useStore();
   const navigate = useNavigate();
   const { register, handleSubmit, formState, setError } = useForm<SignUpFormValues>();
 
   const { mutate: registerWithEmailAndPassword, isLoading: registerWithEmailAndPasswordLoading } =
     useRegisterWithEmailAndPasswordMutation({
       options: {
-        onSuccess: (data: any) => {
-          console.log('@', data);
+        onSuccess: ({ user }: any) => {
+          setCookie(AUTH_COOKIE, user.uid);
+          setStore({ session: { isLoginIn: true } });
           navigate(ROUTES.POKEMONS);
         },
         onError: (error: any) => {
@@ -49,21 +53,14 @@ export const SignUpForm: React.FC = () => {
       )}
     >
       <Input
-        {...register('firstname', {
+        {...register('name', {
           required: { value: true, message: 'Field is required' }
         })}
         disabled={isLoading}
-        placeholder='First name'
-        error={errors.firstname?.message}
+        placeholder=' name'
+        error={errors.name?.message}
       />
-      <Input
-        {...register('lastname', {
-          required: { value: true, message: 'Field is required' }
-        })}
-        disabled={isLoading}
-        placeholder='Last name'
-        error={errors.lastname?.message}
-      />
+
       <Input
         {...register('email', emailSchema)}
         disabled={isLoading}

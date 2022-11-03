@@ -60,7 +60,7 @@
       "@utils/helpers": [
         "./utils/helpers"
       ],
-      "@utils/contexts": [
+      "@utils/context": [
         "./utils/contexts"
       ],
       "@utils/hooks": [

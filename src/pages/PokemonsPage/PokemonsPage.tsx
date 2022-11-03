@@ -3,14 +3,11 @@ import { useInView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
 
 import { PokemonStats, PokemonTypes } from '@common';
-import {
-  useRequestPokemonByIdQuery,
-  useRequestPokemonsInfinityQueries
-} from '@utils/api/hooks';
+import { useRequestPokemonByIdQuery, useRequestPokemonsInfinityQueries } from '@utils/api/hooks';
 import { ROUTES } from '@utils/constants';
 import { getPokemonId } from '@utils/helpers/getPokemonId';
 
-import useDebounce from '../../hooks/useDebounce';
+import useDebounce from '../../utils/hooks/useDebounce';
 
 import { Pokemon } from './Pokemon/Pokemon';
 

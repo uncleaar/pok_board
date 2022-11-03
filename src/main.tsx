@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import { StoreProvider } from './utils/contexts/store';
 import App from './App';
 
 import './assets/styles/globals.scss';
@@ -20,9 +21,9 @@ const root = createRoot(container);
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    <Router>
+    <StoreProvider>
       <App />
-    </Router>
+    </StoreProvider>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 );

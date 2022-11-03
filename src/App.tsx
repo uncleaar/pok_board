@@ -1,10 +1,5 @@
 import { AppRoutes } from './utils/routes';
-import { Layout } from './layout';
 
-const App = () => (
-  <Layout>
-    <AppRoutes />
-  </Layout>
-);
+const App = () => <AppRoutes />;
 
 export default App;
