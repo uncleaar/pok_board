@@ -3,9 +3,12 @@ import { useInView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
 
 import { PokemonStats, PokemonTypes } from '@common';
+import { Button } from '@ui';
 import { useRequestPokemonByIdQuery, useRequestPokemonsInfinityQueries } from '@utils/api/hooks';
 import { ROUTES } from '@utils/constants';
+import { useAddDocumentMutation } from '@utils/firebase';
 import { getPokemonId } from '@utils/helpers/getPokemonId';
+import { useStore } from '@utils/hooks';
 
 import useDebounce from '../../utils/hooks/useDebounce';
 
@@ -19,6 +22,9 @@ interface PokemonInfoProps {
 }
 
 export const PokemonInfo: React.FC<PokemonInfoProps> = ({ id, onClose }) => {
+  const { session } = useStore();
+  const addDocumentMutation = useAddDocumentMutation();
+
   const navigate = useNavigate();
   const { data, isLoading } = useRequestPokemonByIdQuery({ id });
   if (isLoading || !data) return null;
@@ -61,7 +67,15 @@ export const PokemonInfo: React.FC<PokemonInfoProps> = ({ id, onClose }) => {
           stats={pokemon.abilities.map(({ ability }) => ability.name)}
         />
 
-        <button onClick={() => navigate(`/pokemon/${id}`)}>Open</button>
+        {session.isLoginIn && (
+          <Button
+            onClick={() => addDocumentMutation.mutate({ collection: 'pokemons', data: pokemon })}
+          >
+            Add To Team
+          </Button>
+        )}
+
+        <Button onClick={() => navigate(`/pokemon/${id}`)}>Open</Button>
       </div>
     </div>
   );

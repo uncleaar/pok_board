@@ -5,7 +5,7 @@ export type Store = {
   session: {
     isLoginIn: boolean;
   };
-  profile: any;
+  user: any;
 };
 
 export interface StoreContextProps {
@@ -18,7 +18,7 @@ export const StoreContext = React.createContext<StoreContextProps>({
     session: {
       isLoginIn: false
     },
-    profile: {}
+    user: {}
   },
   setStore: () => {}
 });

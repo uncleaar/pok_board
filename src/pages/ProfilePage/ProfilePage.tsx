@@ -1,20 +1,21 @@
-import { useStore } from '@utils/hooks';
 import React from 'react';
+
+import { useStore } from '@utils/hooks';
 
 import styles from './ProfilePage.module.scss';
 
 export const ProfilePage = () => {
-  const { profile } = useStore();
+  const { user } = useStore();
 
-  console.log(profile, 'profile');
+  console.log(user, 'profile');
 
   return (
     <div className={styles.page}>
-      <div>uid: {profile.name}</div>
+      <div>uid: {user.name}</div>
 
-      <div>uid: {profile.uid}</div>
-      <div>email: {profile.email}</div>
-      <img src={profile.photoURL} alt='photoURL' />
+      <div>uid: {user.uid}</div>
+      <div>email: {user.email}</div>
+      <img src={user.photoURL} alt='photoURL' />
     </div>
   );
 };

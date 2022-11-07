@@ -1,19 +1,19 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { Button, Input } from '@ui';
+import { AUTH_COOKIE, ROUTES } from '@utils/constants';
 import {
   loginWithGoogle,
   useLogInWithEmailAndPasswordMutation,
   useLogInWithGoogleMutation
 } from '@utils/firebase';
+import { setCookie } from '@utils/helpers';
+import { useStore } from '@utils/hooks';
 import { emailSchema, passwordSchema } from '@utils/validation';
 
 import styles from '../../Auth.module.scss';
-import { useStore } from '@utils/hooks';
-import { useNavigate } from 'react-router-dom';
-import { AUTH_COOKIE, ROUTES } from '@utils/constants';
-import { setCookie } from '@utils/helpers';
 
 interface SignInFormValues {
   email: User['email'];

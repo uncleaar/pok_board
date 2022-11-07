@@ -1,6 +1,7 @@
-import { ROUTES } from '@utils/constants';
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+import { ROUTES } from '@utils/constants';
 
 import Logo from '../../assets/images/logo.png';
 

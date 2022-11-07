@@ -32,6 +32,7 @@ export const AppRoutes = () => {
             <Route path={ROUTES.POKE} element={<PokePage />} />
             <Route path={ROUTES.POKEMONS} element={<PokemonsPage />} />
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+            <Route path='*' element={<Navigate to={ROUTES.POKEMONS} />} />
           </Routes>
         </Layout>
       )}
