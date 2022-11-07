@@ -1,3 +1,4 @@
+import { ROUTES } from '@utils/constants';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -10,11 +11,15 @@ export const Header: React.FC = () => (
     <div className={styles.header}>
       <img className={styles.logo} src={Logo} alt='' />
       <div className={styles.items}>
-        <Link className={styles.item} to='/'>
+        <Link className={styles.item} to={ROUTES.POKEMONS}>
           Pokemons
         </Link>
-        <Link className={styles.item} to='/poke'>
+        <Link className={styles.item} to={ROUTES.POKE}>
           Pokedex
+        </Link>
+
+        <Link className={styles.item} to={ROUTES.PROFILE}>
+          Profile
         </Link>
       </div>
     </div>

@@ -85,6 +85,8 @@ export const PokemonsPage: React.FC = () => {
     []
   );
 
+  console.log(data, 'pokemons');
+
   return (
     <div className='container'>
       <div className={styles.pokemons_container}>

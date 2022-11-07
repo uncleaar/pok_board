@@ -2,7 +2,11 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, Input } from '@ui';
-import { useLogInWithEmailAndPasswordMutation } from '@utils/firebase';
+import {
+  loginWithGoogle,
+  useLogInWithEmailAndPasswordMutation,
+  useLogInWithGoogleMutation
+} from '@utils/firebase';
 import { emailSchema, passwordSchema } from '@utils/validation';
 
 import styles from '../../Auth.module.scss';
@@ -20,15 +24,25 @@ export const SignInForm: React.FC = () => {
   const { setStore } = useStore();
   const navigate = useNavigate();
 
+  const onSignInSuccess = ({ user }: any) => {
+    setCookie(AUTH_COOKIE, user.uid);
+
+    setStore({ session: { isLoginIn: true }, profile: user });
+    navigate(ROUTES.POKEMONS);
+  };
+
+  const { mutate: logInWithGoogle, isLoading: logInWithGoogleIsLoading } =
+    useLogInWithGoogleMutation({
+      options: {
+        onSuccess: onSignInSuccess,
+        onError: (error: any) => console.log(error, 'error')
+      }
+    });
+
   const { mutate: logInWithEmailAndPassword, isLoading: logInWithEmailAndPasswordIsLoading } =
     useLogInWithEmailAndPasswordMutation({
       options: {
-        onSuccess: ({ user }: any) => {
-          setCookie(AUTH_COOKIE, user.uid);
-
-          setStore({ session: { isLoginIn: true } });
-          navigate(ROUTES.POKEMONS);
-        },
+        onSuccess: onSignInSuccess,
         onError: (error: any) => console.log(error, 'error')
       }
     });
@@ -42,7 +56,7 @@ export const SignInForm: React.FC = () => {
       <form
         className={styles.sign_up_form}
         onSubmit={handleSubmit(async ({ password, email }) => {
-          const logInWithEmailAndPasswordData = await logInWithEmailAndPassword({
+          await logInWithEmailAndPassword({
             email,
             password
           });
@@ -66,6 +80,14 @@ export const SignInForm: React.FC = () => {
           Sign In
         </Button>
       </form>
+      <Button
+        type='submit'
+        variant='outlined'
+        loading={isLoading}
+        onClick={() => logInWithGoogle()}
+      >
+        google
+      </Button>
     </>
   );
 };

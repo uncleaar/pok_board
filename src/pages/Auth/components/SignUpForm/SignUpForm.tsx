@@ -24,7 +24,7 @@ export const SignUpForm: React.FC = () => {
       options: {
         onSuccess: ({ user }: any) => {
           setCookie(AUTH_COOKIE, user.uid);
-          setStore({ session: { isLoginIn: true } });
+          setStore({ session: { isLoginIn: true }, profile: user });
           navigate(ROUTES.POKEMONS);
         },
         onError: (error: any) => {

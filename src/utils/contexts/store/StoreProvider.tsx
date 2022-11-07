@@ -12,7 +12,8 @@ export const StoreProvider: React.FC<StoreProviderProps> = ({ children, ...props
   const [store, setStore] = useState<StoreContextProps['store']>({
     session: {
       isLoginIn: !!getCookie(AUTH_COOKIE)
-    }
+    },
+    profile: {}
   });
 
   useEffect(() => {});

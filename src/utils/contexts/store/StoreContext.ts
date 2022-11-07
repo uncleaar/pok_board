@@ -1,9 +1,11 @@
+import { UserCredential } from 'firebase/auth';
 import React from 'react';
 
 export type Store = {
   session: {
     isLoginIn: boolean;
   };
+  profile: any;
 };
 
 export interface StoreContextProps {
@@ -15,7 +17,8 @@ export const StoreContext = React.createContext<StoreContextProps>({
   store: {
     session: {
       isLoginIn: false
-    }
+    },
+    profile: {}
   },
   setStore: () => {}
 });
