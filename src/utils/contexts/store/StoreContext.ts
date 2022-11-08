@@ -1,11 +1,11 @@
-import { UserCredential } from 'firebase/auth';
+import { User, UserCredential } from 'firebase/auth';
 import React from 'react';
 
 export type Store = {
   session: {
     isLoginIn: boolean;
   };
-  user: any;
+  user: User;
 };
 
 export interface StoreContextProps {
@@ -13,12 +13,14 @@ export interface StoreContextProps {
   setStore: React.Dispatch<React.SetStateAction<Store>>;
 }
 
-export const StoreContext = React.createContext<StoreContextProps>({
-  store: {
-    session: {
-      isLoginIn: false
-    },
-    user: {}
+export const INITIAL_STORE = {
+  session: {
+    isLoginIn: false
   },
+  user: {} as User
+};
+
+export const StoreContext = React.createContext<StoreContextProps>({
+  store: INITIAL_STORE,
   setStore: () => {}
 });

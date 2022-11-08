@@ -22,8 +22,14 @@ interface PokemonInfoProps {
 }
 
 export const PokemonInfo: React.FC<PokemonInfoProps> = ({ id, onClose }) => {
-  const { session } = useStore();
-  const addDocumentMutation = useAddDocumentMutation();
+  const { session, user } = useStore();
+  const addDocumentMutation = useAddDocumentMutation({
+    options: {
+      onSuccess: () => {
+        onClose();
+      }
+    }
+  });
 
   const navigate = useNavigate();
   const { data, isLoading } = useRequestPokemonByIdQuery({ id });
@@ -69,7 +75,13 @@ export const PokemonInfo: React.FC<PokemonInfoProps> = ({ id, onClose }) => {
 
         {session.isLoginIn && (
           <Button
-            onClick={() => addDocumentMutation.mutate({ collection: 'pokemons', data: pokemon })}
+            loading={addDocumentMutation.isLoading}
+            onClick={() =>
+              addDocumentMutation.mutate({
+                collection: 'pokemons',
+                data: { pokemonId: pokemon.id, uid: user.uid }
+              })
+            }
           >
             Add To Team
           </Button>

@@ -1,3 +1,4 @@
+import { User } from 'firebase/auth';
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { AUTH_COOKIE } from '@utils/constants';
@@ -16,10 +17,8 @@ export const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
     session: {
       isLoginIn: false
     },
-    user: {}
+    user: {} as User
   });
-
-  console.log(user, 'user');
 
   useEffect(() => {
     if (user) {

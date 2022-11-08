@@ -1,3 +1,4 @@
+import { User } from 'firebase/auth';
 import { useMutation } from 'react-query';
 
 import { Collection } from '../firebase';
@@ -5,7 +6,7 @@ import { addDocument } from '../requests';
 
 interface UseAddDocumentPokemonMutationParams {
   collection: Extract<Collection, 'pokemons'>;
-  data: Pokemon;
+  data: { uid: User['uid']; pokemonId: Pokemon['id'] };
 }
 
 type UseAddDocumentMutationParams = UseAddDocumentPokemonMutationParams;
