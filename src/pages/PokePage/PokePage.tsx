@@ -2,7 +2,7 @@ import cn from 'classnames';
 import React, { useState } from 'react';
 
 import { PokemonCard } from '@common';
-import { useRequestPokemonFormQuery, useRequestPokemonsQueries } from '@utils/api/hooks';
+import { useRequestPokemonFormQuery, useRequestPokemonsQueries } from '@utils/api';
 
 import styles from './PokePage.module.scss';
 
@@ -12,27 +12,20 @@ export const PokePage: React.FC = () => {
   const [selectedPokemonID, setSelectedPokemonID] = useState(1);
 
   const results = useRequestPokemonsQueries({ offset });
-  const isLoading = results.some((results) => results.isLoading);
-
-  const { data } = useRequestPokemonFormQuery({
-    id: 1,
-    config: { enabled: !isLoading }
-  });
-
-  console.log(data);
+  const isLoading = results.some((results: any) => results.isLoading);
 
   if (isLoading) return null;
 
   const pokemons = results.map((result: any) => result.data.data);
 
-  const selectedPokemon = pokemons.find((pokemon) => selectedPokemonID === pokemon.id)!;
+  const selectedPokemon = pokemons.find((pokemon: any) => selectedPokemonID === pokemon.id)!;
 
   return (
     <div className={styles.page}>
       <div className={styles.content}>
         <PokemonCard pokemon={selectedPokemon} />
         <ul className={styles.list}>
-          {pokemons.map((pokemon) => {
+          {pokemons.map((pokemon: any) => {
             const isActive = selectedPokemonID === pokemon.id;
             return (
               <li

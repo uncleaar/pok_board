@@ -1,13 +1,11 @@
 import { User } from 'firebase/auth';
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { AUTH_COOKIE } from '@utils/constants';
 import { useAuthState } from '@utils/firebase';
-import { getCookie } from '@utils/helpers';
 
 import { StoreContext, StoreContextProps } from './StoreContext';
 
-export interface StoreProviderProps extends StoreContextProps {
+export interface StoreProviderProps {
   children: React.ReactNode;
 }
 

@@ -1,8 +1,7 @@
-import { collection, query, where } from 'firebase/firestore';
-
+import { PokemonEvolutionChainItem } from '@common';
 import { Button } from '@ui';
 import { INITIAL_STORE } from '@utils/contexts';
-import { db, useCollection, useLogoutMutation } from '@utils/firebase';
+import { useLogoutMutation, useUserPokemonsCollection } from '@utils/firebase';
 import { useStore } from '@utils/hooks';
 
 import styles from './ProfilePage.module.scss';
@@ -10,10 +9,10 @@ import styles from './ProfilePage.module.scss';
 export const ProfilePage = () => {
   const { user, setStore } = useStore();
   const logoutMuation = useLogoutMutation();
-  const q = query(collection(db, 'pokemons'), where('uid', '==', user.uid));
-  const { data } = useCollection(q);
 
-  console.log(data, 'data');
+  const { documents } = useUserPokemonsCollection({ uid: user.uid });
+
+  console.log(documents, 'documents');
 
   return (
     <div className={styles.page}>
@@ -31,6 +30,19 @@ export const ProfilePage = () => {
       >
         Logout
       </Button>
+
+      {documents && (
+        <div>
+          <div>Team</div>
+          <div className={styles.document}>
+            {documents.map((document) => (
+              <div className={styles.document_inner}>
+                <PokemonEvolutionChainItem name={document.name} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -4,13 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { PokemonStats, PokemonTypes } from '@common';
 import { Button } from '@ui';
-import { useRequestPokemonByIdQuery, useRequestPokemonsInfinityQueries } from '@utils/api/hooks';
-import { ROUTES } from '@utils/constants';
+import { useRequestPokemonByIdQuery, useRequestPokemonsInfinityQueries } from '@utils/api';
 import { useAddDocumentMutation } from '@utils/firebase';
-import { getPokemonId } from '@utils/helpers/getPokemonId';
+import { getPokemonId } from '@utils/helpers';
 import { useStore } from '@utils/hooks';
-
-import useDebounce from '../../utils/hooks/useDebounce';
 
 import { Pokemon } from './Pokemon/Pokemon';
 
@@ -79,7 +76,7 @@ export const PokemonInfo: React.FC<PokemonInfoProps> = ({ id, onClose }) => {
             onClick={() =>
               addDocumentMutation.mutate({
                 collection: 'pokemons',
-                data: { pokemonId: pokemon.id, uid: user.uid }
+                data: { id: pokemon.id, name: pokemon.name, uid: user.uid }
               })
             }
           >

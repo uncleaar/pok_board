@@ -2,13 +2,13 @@ import classNames from 'classnames';
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useRequestPokemonByNameQuery } from '@utils/api/hooks';
+import { useRequestPokemonByNameQuery } from '@utils/api';
 
 import styles from './PokemonEvolutionChainItem.module.scss';
 
 interface PokemonEvolutionChainItemProps {
   name: Pokemon['name'];
-  isActive: boolean;
+  isActive?: boolean;
 }
 
 export const PokemonEvolutionChainItem: React.FC<PokemonEvolutionChainItemProps> = ({
@@ -16,10 +16,10 @@ export const PokemonEvolutionChainItem: React.FC<PokemonEvolutionChainItemProps>
   isActive
 }) => {
   const navigate = useNavigate();
-  const { data: pokemonNameData, isLoading: pokemonNameLoading } =
-    useRequestPokemonByNameQuery({
-      name
-    });
+
+  const { data: pokemonNameData, isLoading: pokemonNameLoading } = useRequestPokemonByNameQuery({
+    name
+  });
 
   const isPokemonNameData = !!pokemonNameData && !pokemonNameLoading;
   if (!isPokemonNameData) return null;

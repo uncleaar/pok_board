@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { Auth, PokemonPage, PokemonsPage, PokePage, ProfilePage } from '@pages';
 import { ROUTES } from '@utils/constants';
-import { StoreProvider } from '@utils/context';
+import { StoreProvider } from '@utils/contexts';
 import { useStore } from '@utils/hooks';
 
 import { Layout } from '../../layout';

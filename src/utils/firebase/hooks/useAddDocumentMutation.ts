@@ -1,12 +1,19 @@
 import { User } from 'firebase/auth';
-import { useMutation } from 'react-query';
+
+import { useMutation } from '@tanstack/react-query';
 
 import { Collection } from '../firebase';
 import { addDocument } from '../requests';
 
+export interface PokemonDocument {
+  uid: User['uid'];
+  name: Pokemon['name'];
+  id: Pokemon['id'];
+}
+
 interface UseAddDocumentPokemonMutationParams {
   collection: Extract<Collection, 'pokemons'>;
-  data: { uid: User['uid']; pokemonId: Pokemon['id'] };
+  data: PokemonDocument;
 }
 
 type UseAddDocumentMutationParams = UseAddDocumentPokemonMutationParams;

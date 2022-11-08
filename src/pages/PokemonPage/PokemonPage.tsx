@@ -2,15 +2,15 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { PokemonEvolutionChain, PokemonStats } from '@common';
-import { useRequestPokemonByIdQuery, useRequestPokemonSpeciesQuery } from '@utils/api/hooks';
-import { getPokemonId } from '@utils/helpers/getPokemonId';
+import { useRequestPokemonByIdQuery, useRequestPokemonSpeciesQuery } from '@utils/api';
+import { getPokemonId } from '@utils/helpers';
 
 import { Button } from '../../ui';
 
 import styles from './PokemonPage.module.scss';
 
 export const PokemonPage: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: any }>();
   const navigate = useNavigate();
 
   const { data: pokemonData, isLoading: pokemonLoading } = useRequestPokemonByIdQuery({
@@ -36,7 +36,7 @@ export const PokemonPage: React.FC = () => {
       {isPokemonData && (
         <>
           <div className={styles.name_container}>
-            <div className={styles.number}>{getPokemonId(id)}</div>
+            <div className={styles.number}>{getPokemonId(id)} as </div>
             <h1>{pokemonData.data.name}</h1>
           </div>
 
@@ -47,9 +47,7 @@ export const PokemonPage: React.FC = () => {
 
             <PokemonStats
               title='stats'
-              stats={pokemonData.data.stats.map(
-                (item) => `${item.stat.name}: ${item.base_stat}`
-              )}
+              stats={pokemonData.data.stats.map((item) => `${item.stat.name}: ${item.base_stat}`)}
             />
 
             <PokemonStats
@@ -59,7 +57,7 @@ export const PokemonPage: React.FC = () => {
           </div>
         </>
       )}
-      <PokemonEvolutionChain chainId={chainId} pokemonName={pokemonData.data.name} />
+      <PokemonEvolutionChain chainId={+chainId} pokemonName={pokemonData.data.name} />
       <div className={styles.buttons}>
         {id > 1 && <Button onClick={() => navigate(`/pokemon/${id - 1}`)}>Prev</Button>}
 

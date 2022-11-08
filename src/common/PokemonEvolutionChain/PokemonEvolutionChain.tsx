@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import { useRequestEvolutionChainQuery } from '@utils/api/hooks';
+import { useRequestEvolutionChainQuery } from '@utils/api';
 
 import { Title } from '../../ui';
 
@@ -38,17 +38,14 @@ export const PokemonEvolutionChain: React.FC<PokemonEvolutionChainProps> = ({
   const isEvolutionChainData = !!evolutionChainData || !evolutionChainLoading;
   if (!isEvolutionChainData) return null;
 
-  const evolutionChain = generateEvolutionChain(evolutionChainData.data.chain);
+  const evolutionChain = generateEvolutionChain(evolutionChainData!.data.chain);
 
   return (
     <div className={styles.container}>
       <Title>Evolution chain</Title>
       <div className={styles.evolution__container}>
         {evolutionChain?.map((evolve: any) => (
-          <PokemonEvolutionChainItem
-            name={evolve.name}
-            isActive={pokemonName === evolve.name}
-          />
+          <PokemonEvolutionChainItem name={evolve.name} isActive={pokemonName === evolve.name} />
         ))}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { requestEvolutionChain } from '../../requests';
 
@@ -12,7 +12,6 @@ export const useRequestEvolutionChainQuery = (
 ) =>
   useQuery(
     ['evolution-chain', params.id],
-    () =>
-      requestEvolutionChain({ params, ...(settings?.config && { config: settings.config }) }),
+    () => requestEvolutionChain({ params, ...(settings?.config && { config: settings.config }) }),
     settings?.options && settings.options
   );

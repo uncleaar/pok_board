@@ -8,7 +8,7 @@ type RequestParams<Params> = Params;
 
 interface RequestMutationSettings<Func = {}> {
   config?: import('axios').AxiosRequestConfig;
-  options?: import('@tanstack/react-query').UseMutationOptions<
+  options?: import('@tanstack/@tanstack/react-query').UseMutationOptions<
     Awaited<ReturnType<Func>>,
     any,
     any,
@@ -18,7 +18,7 @@ interface RequestMutationSettings<Func = {}> {
 
 interface RequestQuerySettings<Func = {}> {
   config?: import('axios').AxiosRequestConfig;
-  options?: import('@tanstack/react-query').UseQueryOptions<
+  options?: import('@tanstack/@tanstack/react-query').UseQueryOptions<
     Awaited<ReturnType<Func>>,
     any,
     Awaited<ReturnType<Func>>,
@@ -28,7 +28,7 @@ interface RequestQuerySettings<Func = {}> {
 
 interface RequestInfinityQuerySettings<Func = {}> {
   config?: import('axios').AxiosRequestConfig;
-  options?: import('@tanstack/react-query').UseInfiniteQueryOptions<
+  options?: import('@tanstack/@tanstack/react-query').UseInfiniteQueryOptions<
     Awaited<ReturnType<Func>>,
     any,
     Awaited<ReturnType<Func>>,
@@ -43,7 +43,7 @@ interface RequestQueryParams<Params = {}> {
 
 interface RequestQueryWithoutParams<Func = {}> {
   config?: import('axios').AxiosRequestConfig;
-  options?: import('@tanstack/react-query').UseQueryOptions<
+  options?: import('@tanstack/@tanstack/react-query').UseQueryOptions<
     Awaited<ReturnType<Func>>,
     any,
     Awaited<ReturnType<Func>>,
@@ -54,7 +54,7 @@ interface RequestQueryWithoutParams<Func = {}> {
 
 interface RequestInfiniteQueryWithoutParams<Func = {}> {
   config?: import('axios').AxiosRequestConfig;
-  options?: import('@tanstack/react-query').UseInfiniteQueryOptions<
+  options?: import('@tanstack/@tanstack/react-query').UseInfiniteQueryOptions<
     Awaited<ReturnType<Func>>,
     any,
     Awaited<ReturnType<Func>>,

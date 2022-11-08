@@ -1,3 +1,9 @@
 .page {
   @apply container p-6;
 }
+
+.document_inner {
+  img {
+    @apply mx-auto;
+  }
+}

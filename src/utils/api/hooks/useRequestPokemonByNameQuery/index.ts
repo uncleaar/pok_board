@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { requestPokemonByName } from '../../requests';
 
@@ -12,7 +12,6 @@ export const useRequestPokemonByNameQuery = (
 ) =>
   useQuery(
     ['pokemon', params.name],
-    () =>
-      requestPokemonByName({ params, ...(settings?.config && { config: settings.config }) }),
+    () => requestPokemonByName({ params, ...(settings?.config && { config: settings.config }) }),
     settings?.options && settings.options
   );
